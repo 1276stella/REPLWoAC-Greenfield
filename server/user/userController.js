@@ -98,8 +98,8 @@ module.exports = {
           console.log('creat a new user...');
           // create the new user to store in DB
           var newUser = {
-            firstName : req.body.firstname,
-            lastName : req.body.lastname,
+            firstName : req.body.firstName,
+            lastName : req.body.lastName,
             username : req.body.username,
             password : req.body.password,
             phoneNumber : req.body.phoneNumber,

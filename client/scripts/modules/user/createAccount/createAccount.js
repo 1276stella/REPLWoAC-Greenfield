@@ -5,7 +5,7 @@ angular.module('crash.createAccount', ['ngCookies'])
   var self = this;
   self.user = {};
   self.errorMessage = '';
-  var flag = false;
+  self.facebookLogin = false;
 
   /***
     get the username from cookies
@@ -17,11 +17,14 @@ angular.module('crash.createAccount', ['ngCookies'])
         console.log('user : ', user);
         self.user = user;
         if(user) {
-          flag = true;
+          self.facebookLogin = true;
+        } else {
+          self.facebookLogin = false;
         }
         console.log('self.user : ', self.user);
       })
       .catch(function(err){
+        self.facebookLogin = false;    
         console.log('user not received...', err);
       });
   };
@@ -34,7 +37,7 @@ angular.module('crash.createAccount', ['ngCookies'])
   self.createAccount = function(){
     console.log('create account for user : ', self.user);
     var promise;
-    if(!flag) {
+    if(!self.facebookLogin) {
       promise = UserService.createAccount(self.user);
     } else {
       promise = UserService.updateUserAccount(self.user);
